@@ -49,30 +49,28 @@ These scripts simplify display handling for headless setups, virtual monitors, a
 
 ## Usage
 
-### Enable dummy HDMI output
-
-```bash
-kscreen-dummy-on
-```
-
-### Revert to normal local display
-
-```bash
-kscreen-dummy-revert
-```
-
 ### Automatic resolution fix during Sunshine session
 
 Configure Sunshine to run these scripts automatically.
 
-When editing your Sunshine `config.json` or using its Web UI, set:
+Do Command 1:
+`kscreen-doctor output.HDMI-A-3.enable output.HDMI-A-3.primary output.DP-3.disable output.DP-1.disable`
 
-```
-"on_connection_start": "/path/to/kscreen-sunshine-fix",
-"on_connection_end": "/path/to/kscreen-dummy-revert"
-```
+Undo Command 1:
+`kscreen-doctor output.HDMI-A-3.disable output.DP-1.enable output.DP-3.enable output.DP-1.primary output.DP-1.mode.2560x1440@180 output.DP-3.mode.1920x1080@144`
 
-This makes Sunshine trigger the correct dummy display resolution when a client connects.
+Do Command 2:
+`kscreen-sunshine-fix`
+
+This makes Sunshine trigger the correct dummy display resolution on a dummy plug and disable the other displays when a client connects, then revert when disconnect.
+
+### Turn on Dummy Screen When Displays Off
+
+Set up Power Management to run the dummy on script to match your displays off timer.
+
+### Turn Screens Back On After Idle
+
+Set up a global shortcut to run the revert script. Any ideas for a more elegant way to do this?
 
 ***
 
@@ -83,21 +81,6 @@ This makes Sunshine trigger the correct dummy display resolution when a client c
 ```
 /tmp/sunshine-script.log
 ```
-
-To monitor the log:
-
-```bash
-tail -f /tmp/sunshine-script.log
-```
-
-***
-
-## Example Workflow
-
-1. Start Sunshine on your Nobara system.  
-2. Enable the dummy HDMI display: `kscreen-dummy-on`  
-3. Connect with Moonlight — the resolution will auto-adjust.  
-4. When finished, revert using: `kscreen-dummy-revert`
 
 ***
 
