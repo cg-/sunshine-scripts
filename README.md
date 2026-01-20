@@ -29,7 +29,7 @@ These scripts simplify display handling for headless setups, virtual monitors, a
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/<your-username>/sunshine-scripts.git
+   git clone https://github.com/cg-/sunshine-scripts.git
    cd sunshine-scripts
    ```
 
